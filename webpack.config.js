@@ -53,7 +53,7 @@ module.exports = {
   },
   resolve: {
     modules: [path.join(__dirname, 'src'), 'node_modules'], // 모듈 위치
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.ts', '.js'],
   },
   plugins: [
     new HtmlWebpackPlugin({
