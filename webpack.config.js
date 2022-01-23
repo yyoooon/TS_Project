@@ -41,6 +41,13 @@ module.exports = {
           loader: 'ts-loader',
         },
       },
+      {
+        test: /\.ts$/,
+        exclude: /node_module/,
+        use: {
+          loader: 'babel-loader',
+        },
+      },
     ],
   },
   devServer: {
