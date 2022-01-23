@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   mode: 'development', // 개발용? 배포용?
   entry: {
-    main: './src/index.js',
+    main: './src/index.ts',
   },
   output: {
     path: path.resolve('./dist'), // 결과파일을 저장하려는 절대경로
@@ -30,23 +30,14 @@ module.exports = {
         ],
       },
       {
+        test: /\.ts$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      {
         test: /\.js$/,
         exclude: /node_modules/,
         use: 'babel-loader',
-      },
-      {
-        test: /\.ts$/,
-        exclude: /node_module/,
-        use: {
-          loader: 'ts-loader',
-        },
-      },
-      {
-        test: /\.ts$/,
-        exclude: /node_module/,
-        use: {
-          loader: 'babel-loader',
-        },
       },
     ],
   },
@@ -62,7 +53,7 @@ module.exports = {
   },
   resolve: {
     modules: [path.join(__dirname, 'src'), 'node_modules'], // 모듈 위치
-    extensions: ['.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js'],
   },
   plugins: [
     new HtmlWebpackPlugin({

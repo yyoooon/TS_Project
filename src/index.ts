@@ -1,3 +1,6 @@
+import * as _ from 'lodash';
 import '../style/index.scss';
+import App from './App';
 
-console.log('hbb!!!!b');
+const $target = document.querySelector('#app');
+$target instanceof Element && new App({ $target });
