@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import '../style/index.scss';
 import App from './App';
 

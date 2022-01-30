@@ -1,10 +1,7 @@
-
 export default class Home {
-  $target:Element;
+  $target: Element;
   $home: Element;
-  constructor({ $target }:{
-    $target:Element
-  }) {
+  constructor({ $target }: { $target: Element }) {
     this.$target = $target;
     this.$home = document.createElement('div');
     this.render();
@@ -14,8 +11,7 @@ export default class Home {
   }
   render() {
     this.$home.innerHTML = `
-      <h1 class='home_title'>안녕</h1>
+      <h1 class='home_title'>안녕ㅠㅠㅠ!!!!!</h1>
     `;
   }
 }
-

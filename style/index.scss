@@ -1,8 +1,7 @@
-@import url('./home.scss');
+@import 'home.scss';
+@import 'hexColors.scss';
+@import 'randomQuotes.scss';
 
 body {
-  background: yellow;
-  p {
-    color: white;
-  }
+  box-sizing: border-box;
 }

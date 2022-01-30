@@ -1,17 +1,17 @@
-import Home from './views/Home';
+// import HexColors from './views/HexColors';
+import RandomQuotes from './views/RandomQuotes';
 
 export default class App {
   $target: Element;
-  Home: Home;
   constructor({ $target }: { $target: Element }) {
     this.$target = $target;
-    this.Home = new Home({ $target: this.$target });
     this.route();
   }
   route() {
     const { pathname } = window.location;
     if (pathname === '/') {
-      this.Home.route();
+      // new HexColors(this.$target);
+      new RandomQuotes(this.$target);
     }
   }
 }
