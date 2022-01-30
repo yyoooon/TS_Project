@@ -1,21 +1,22 @@
-const path = require('path'); // path라는 내장 모듈을 불러옴
+/* eslint-disable @typescript-eslint/no-var-requires */
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  mode: 'development', // 개발용? 배포용?
+  mode: 'development',
   entry: {
     main: './src/index.ts',
   },
   output: {
-    path: path.resolve('./dist'), // 결과파일을 저장하려는 절대경로
+    path: path.resolve('./dist'),
     filename: '[name].js', // 파일명 []사용시 entry키값
   },
   module: {
     rules: [
       {
-        test: /\.scss$/, //파일 확장자
+        test: /\.scss$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'], // 사용할 로더
       },
       {
@@ -36,8 +37,8 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        exclude: /node_modules/,
         use: 'babel-loader',
+        exclude: /node_modules/,
       },
     ],
   },
@@ -45,15 +46,13 @@ module.exports = {
     static: {
       directory: path.join(__dirname, 'dist'),
     },
-    port: 3000,
-    devMiddleware: {
-      publicPath: 'https://localhost:3000',
-    },
     hot: 'only',
+    port: 5500,
+    compress: true,
   },
   resolve: {
-    modules: [path.join(__dirname, 'src'), 'node_modules'], // 모듈 위치
-    extensions: ['.ts', '.js'],
+    modules: [path.join(__dirname, 'src'), 'node_modules'],
+    extensions: ['*', '.ts', '.js'],
   },
   plugins: [
     new HtmlWebpackPlugin({
