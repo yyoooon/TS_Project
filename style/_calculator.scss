@@ -1,0 +1,26 @@
+.calculator_button {
+  width: 24%;
+  height: 45px;
+  border-radius: 1px;
+  border: none;
+  outline: none;
+  margin-top: 3px;
+  background: whitesmoke;
+  &:hover {
+    background-color: rgba(128, 128, 128, 0.1);
+  }
+}
+
+[data-name='view'] {
+  width: 100%;
+  padding: 40px 5px;
+  background: whitesmoke;
+  text-align: right;
+  direction: ltr;
+  outline: none;
+  border: none;
+  font-size: 2rem;
+  .placeholder {
+    color: gray;
+  }
+}
