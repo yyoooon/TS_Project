@@ -1,17 +1,28 @@
-export default class Home {
-  $target: Element;
-  $home: Element;
-  constructor({ $target }: { $target: Element }) {
-    this.$target = $target;
-    this.$home = document.createElement('div');
-    this.render();
-  }
-  route() {
-    this.$target.appendChild(this.$home);
-  }
-  render() {
-    this.$home.innerHTML = `
-      <h1 class='home_title'>안녕ㅠㅠㅠ!!!!!</h1>
+import Component from '../components/template/Component';
+import Header from '../components/Home/Header';
+import Contents from '../components/Home/Contents';
+
+const contentData = [
+  {
+    title: 'HexColors',
+    thumbnail: '썸네일1',
+    url: 'HexColors',
+  },
+];
+
+export default class Home extends Component<undefined, undefined> {
+  template() {
+    return `
+    <header data-name="home-header"></header>
+    <main>
+      <ul data-name="content-list"></ul>
+    </main>
     `;
+  }
+  mounted() {
+    const $header = document.querySelector('[data-name="home-header"]');
+    const $contents = document.querySelector('[data-name="content-list"]');
+    new Header($header);
+    new Contents($contents, { data: contentData });
   }
 }

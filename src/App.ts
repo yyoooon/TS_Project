@@ -1,29 +1,21 @@
-// import HexColors from './views/HexColors';
-// import RandomQuotes from './views/RandomQuotes';
-// import ImageSlider from './views/ImageSlider';
-// import { imageUrlList } from './dummy';
-// import DigitalClock from './views/DigitalClock';
-import Calculator from './views/Calculator';
+import Component from './components/template/Component';
+// import Home from './views/Home';
+import HexColors from './views/HexColors';
 
-export default class App {
-  $target: Element;
-  constructor({ $target }: { $target: Element }) {
-    this.$target = $target;
-    this.route();
-  }
+export default class App extends Component<undefined, undefined> {
   route() {
     const { pathname } = window.location;
-    if (pathname === '/') {
-      // new HexColors(this.$target);
-      // new RandomQuotes(this.$target);
-      // new ImageSlider(this.$target, { imageUrlList });
-      // new DigitalClock(this.$target);
-      // new ButtonContainer(this.$target, {
-      //   onClick: value => {
-      //     console.log(value);
-      //   },
-      // });
-      new Calculator(this.$target);
+    switch (pathname) {
+      case '/':
+        this.$target.innerHTML = '';
+        new HexColors(this.$target);
+        break;
+      default:
+        alert('not found page');
+        break;
     }
+  }
+  mounted() {
+    this.route();
   }
 }
