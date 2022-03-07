@@ -6,13 +6,15 @@ interface ChangeButtonProps {
 
 class ChangeButton extends Component<ChangeButtonProps, undefined> {
   setup() {
-    this.setSelector(this.$myDom, 'change-button');
+    if (this.$myDom instanceof HTMLElement) {
+      this.$myDom.dataset.name = 'change-button';
+    }
   }
   template() {
-    return `click me`;
+    return `Generate Quote`;
   }
   setEvent() {
-    this.addEvent('click', this.props.onClick);
+    this.$myDom.addEventListener('click', this.props.onClick);
   }
 }
 export default ChangeButton;

@@ -1,6 +1,6 @@
 import Component from '../components/template/Component';
-import Header from '../components/Home/Header';
-import Contents from '../components/Home/Contents';
+import Header from '../components/home/Header';
+import Contents from '../components/home/Contents';
 
 const contentData = [
   {
@@ -10,19 +10,20 @@ const contentData = [
   },
 ];
 
-export default class Home extends Component<undefined, undefined> {
-  template() {
-    return `
-    <header data-name="home-header"></header>
-    <main>
-      <ul data-name="content-list"></ul>
-    </main>
-    `;
+export default class Home extends Component<
+  undefined,
+  { [key: string]: string }[]
+> {
+  $header: Header;
+  $contents: Contents;
+  constructor($target: Element, tagName: string) {
+    super($target, tagName);
+    this.$header = new Header(this.$myDom, 'h1');
+    this.$contents = new Contents(this.$myDom, 'ul', { data: this.state });
   }
-  mounted() {
-    const $header = document.querySelector('[data-name="home-header"]');
-    const $contents = document.querySelector('[data-name="content-list"]');
-    new Header($header);
-    new Contents($contents, { data: contentData });
+
+  setup() {
+    this.state = contentData;
+    this.setSelector(this.$myDom, 'home-container');
   }
 }

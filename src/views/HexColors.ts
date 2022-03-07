@@ -1,38 +1,41 @@
 import Component from '../components/template/Component';
-import ChangeButton from '../components/HexColors/ChangeButton';
+import ChangeButton from '../components/hexColors/ChangeButton';
+import Contents from '../components/hexColors/Contents';
 
-class HexColors extends Component<undefined, { hexCode: string }> {
-  setup() {
-    this.state = { hexCode: '#ffffff' };
+interface HexColorsState {
+  hexCode: string;
+}
+
+class HexColors extends Component<undefined, HexColorsState> {
+  $changeButton;
+  $contents;
+  constructor($target: Element, tagName: string) {
+    super($target, tagName);
+    this.$contents = new Contents(this.$myDom, 'div');
+    this.$changeButton = new ChangeButton(this.$myDom, 'button', {
+      onClick: this.handleClickButton.bind(this),
+    });
   }
 
-  template() {
-    const { hexCode } = this.state;
-    return `
-    <div data-name='hex-color_container' style="background:${hexCode};">
-      <div  data-name="contents">
-        <h1 data-name='title'>CLICK THE BUTTON BELLOW TO DISPLAY THE HEX CODE </br> OF THE A RANDOM COLOR</h1>
-        <p data-name='color-code'>The hex code of the color is ${hexCode}</p>
-      </div> 
-      <div data-name="button_wrap"></div>
-    </div>
-    `;
+  setup() {
+    this.setSelector(this.$myDom, 'hex-color_container');
+  }
+
+  setState(newState: HexColorsState) {
+    this.state = { ...this.state, ...newState };
+    if (this.$myDom instanceof HTMLElement) {
+      this.$myDom.style.background = this.state.hexCode;
+    }
+    this.$contents.setState(this.state);
   }
 
   getRandomColor() {
     return '#' + Math.round(Math.random() * 0xffffff).toString(16);
   }
 
-  handleChangeBackColor() {
+  handleClickButton() {
     const backColorCode = `linear-gradient( to left, ${this.getRandomColor()}, ${this.getRandomColor()} )`;
     this.setState({ hexCode: backColorCode });
-  }
-
-  mounted() {
-    const $button_wrap = document.querySelector('[data-name="button_wrap"]');
-    new ChangeButton($button_wrap, {
-      handleChangeBackColor: this.handleChangeBackColor.bind(this),
-    });
   }
 }
 

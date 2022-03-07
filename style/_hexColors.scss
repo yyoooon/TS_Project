@@ -36,13 +36,13 @@
     margin-bottom: 20px;
   }
 
-  [data-name='change_button'] {
+  [data-name='change-button'] {
     width: 100px;
     height: 50px;
     background-color: darken($color: #fff, $amount: 4%);
     border-radius: 10px;
     font-size: 1.2rem;
-    margin-top: 1.5rem;
+    margin: 1.5rem auto;
     transition: all 150ms ease-out;
     &:hover {
       background-color: darken($color: #fff, $amount: 12%);

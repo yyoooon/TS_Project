@@ -4,7 +4,7 @@ interface ContentsProps {
   data: { [key: string]: string }[];
 }
 
-export default class Contents extends Component<ContentsProps, undefined> {
+export default class Contents extends Component<ContentsProps, ContentsProps> {
   template() {
     const { data } = this.props;
     return `
@@ -18,9 +18,10 @@ export default class Contents extends Component<ContentsProps, undefined> {
   }
 
   setEvent() {
-    this.addEvent('click', '[data-name="content-item"]', ({ target }) => {
+    this.addEvent('click', ({ target }) => {
       if (target instanceof HTMLElement) {
         const { url } = target.dataset;
+        console.log(url);
         history.pushState(null, null, url);
       }
     });
