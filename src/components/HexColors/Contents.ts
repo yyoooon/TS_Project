@@ -3,7 +3,6 @@ import Component from '../template/Component';
 class Contents extends Component<{ hexCode: string }, { hexCode: string }> {
   setup() {
     this.state = this.props || { hexCode: '#fff' };
-    this.setSelector(this.$myDom, 'contents');
   }
   template() {
     return `

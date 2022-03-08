@@ -1,32 +1,34 @@
 import Component from '../components/template/Component';
-import ChangeButton from '../components/hexColors/ChangeButton';
 import Contents from '../components/hexColors/Contents';
+import ChageButton from '../components/hexColors/ChangeButton';
 
 interface HexColorsState {
   hexCode: string;
 }
 
 class HexColors extends Component<undefined, HexColorsState> {
-  $changeButton;
-  $contents;
-  constructor($target: Element, tagName: string) {
-    super($target, tagName);
-    this.$contents = new Contents(this.$myDom, 'div');
-    this.$changeButton = new ChangeButton(this.$myDom, 'button', {
-      onClick: this.handleClickButton.bind(this),
-    });
-  }
-
   setup() {
-    this.setSelector(this.$myDom, 'hex-color_container');
+    this.state = { hexCode: '#ffffff' };
   }
 
-  setState(newState: HexColorsState) {
-    this.state = { ...this.state, ...newState };
-    if (this.$myDom instanceof HTMLElement) {
-      this.$myDom.style.background = this.state.hexCode;
-    }
-    this.$contents.setState(this.state);
+  template() {
+    return `
+    <div data-name="hex-colors_container" style="background:${this.state.hexCode};">
+      <div data-name="contents"></div>
+      <div data-name="change-button-wrap"></div>
+    </div>
+    `;
+  }
+
+  mounted() {
+    const $contents = this.$target.querySelector('[data-name="contents"]');
+    const $button = this.$target.querySelector(
+      '[data-name="change-button-wrap"]',
+    );
+
+    new Contents($contents, this.state);
+    new ChageButton($button, { onClick: this.handleClickButton.bind(this) });
+    return;
   }
 
   getRandomColor() {

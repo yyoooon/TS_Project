@@ -1,16 +1,13 @@
 export default class Component<P, S> {
   $target: Element;
-  $myDom: Element;
   props: P;
   state?: S;
-  constructor($target: Element, tagName?: string, props?: P) {
+  constructor($target: Element, props?: P) {
     this.$target = $target;
-    this.$myDom = document.createElement(tagName);
-    this.$target.appendChild(this.$myDom);
     this.props = props;
     this.setup();
-    this.setEvent();
     this.render();
+    this.setEvent();
   }
 
   setup() {
@@ -32,7 +29,7 @@ export default class Component<P, S> {
   }
 
   render() {
-    this.$myDom.innerHTML = this.template();
+    this.$target.innerHTML = this.template();
     this.mounted();
   }
 
@@ -46,10 +43,10 @@ export default class Component<P, S> {
   }
 
   addEvent(eventType: string, callback: (e: Event) => void) {
-    this.$myDom.addEventListener(eventType, callback);
+    this.$target.addEventListener(eventType, callback);
   }
 
-  addEventToParent(
+  addEventToTarget(
     eventType: string,
     selector: string,
     callback: (e: Event) => void,
