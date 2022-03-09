@@ -14,12 +14,6 @@ export default class Component<P, S> {
     return;
   }
 
-  setSelector($dom: Element, name: string) {
-    if ($dom instanceof HTMLElement) {
-      $dom.dataset.name = name;
-    }
-  }
-
   mounted() {
     return;
   }
