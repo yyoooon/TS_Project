@@ -1,5 +1,5 @@
 import Component from '../template/Component';
-import { push } from '../../routes/routeUtils';
+import { push } from '../../routes/router';
 
 interface ContentsProps {
   data: { [key: string]: string }[];
@@ -21,19 +21,16 @@ export default class Contents extends Component<ContentsProps, undefined> {
   }
 
   handleClickContent(e: Event) {
-    console.log('handler');
     const { target } = e;
     if (target instanceof HTMLElement) {
-      const { url } = target.dataset;
-      push(url);
+      if (target.dataset.name === 'content-item') {
+        const { url } = target.dataset;
+        push(url);
+      }
     }
   }
 
   setEvent() {
-    this.addEventToTarget(
-      'click',
-      '[data-name="content-item"]',
-      this.handleClickContent,
-    );
+    this.$target.addEventListener('click', this.handleClickContent);
   }
 }
