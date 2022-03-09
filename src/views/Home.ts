@@ -1,6 +1,5 @@
 import Component from '../components/template/Component';
-import Header from '../components/home/Header';
-import Contents from '../components/home/Contents';
+import Contents from '../components/Home/Contents';
 
 const contentData = [
   {
@@ -11,7 +10,7 @@ const contentData = [
   {
     title: 'RandomQuotes',
     thumbnail: '썸네일2',
-    url: 'HexColors',
+    url: 'RandomQuotes',
   },
 ];
 
@@ -23,19 +22,7 @@ export default class Home extends Component<
     this.state = contentData;
   }
 
-  template() {
-    return `
-      <header data-name='home-header'></header>
-      <main data-name='home-main'></main>
-      <footer data-name='home-footer'></footer>
-    `;
-  }
-
   mounted() {
-    const $header = this.$target.querySelector('[data-name="home-header"]');
-    const $main = this.$target.querySelector('[data-name="home-main"]');
-
-    new Header($header);
-    new Contents($main, { data: this.state });
+    new Contents(this.$target, { data: this.state });
   }
 }

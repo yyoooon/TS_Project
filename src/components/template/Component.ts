@@ -42,10 +42,6 @@ export default class Component<P, S> {
     this.render();
   }
 
-  addEvent(eventType: string, callback: (e: Event) => void) {
-    this.$target.addEventListener(eventType, callback);
-  }
-
   addEventToTarget(
     eventType: string,
     selector: string,

@@ -1,36 +1,45 @@
-// import Component from '../components/template/Component';
-// import ChangeButton from '../components/randomQuotes/ChangeButton';
-// import Contents from '../components/randomQuotes/contents';
-// import axios from 'axios';
+import Component from '../components/template/Component';
+import Contents from '../components/RandomQuotes/Contents';
+import ChangeButton from '../components/RandomQuotes/ChangeButton';
+import axios from 'axios';
 
-// class RandomQuotes extends Component<undefined, { [key: string]: string }> {
-//   $contents;
-//   $changeButton;
-//   constructor($target: Element, tagName: string) {
-//     super($target, tagName);
-//     this.$contents = new Contents(this.$myDom, 'div', { ...this.state });
-//     this.$changeButton = new ChangeButton(this.$myDom, 'button', {
-//       onClick: this.handleClickButton.bind(this),
-//     });
-//   }
+class RandomQuotes extends Component<undefined, { [key: string]: string }> {
+  setup() {
+    this.state = {
+      quote: '',
+      author: 'RandomQuotes',
+    };
+  }
 
-//   setup() {
-//     this.state = {
-//       quote: '',
-//       author: 'RandomQuotes',
-//     };
-//     this.setSelector(this.$myDom, 'quotes-container');
-//   }
+  template() {
+    return `
+    <div data-name="quotes-container" style="background:${this.state.hexCode};">
+      <div data-name="contents"></div>
+      <div data-name="change-button-wrap"></div>
+    </div>
+    `;
+  }
 
-//   setState(newState: { [key: string]: string }) {
-//     this.state = { ...this.state, ...newState };
-//     this.$contents.setState(newState);
-//   }
+  mounted() {
+    const $contents = this.$target.querySelector('[data-name="contents"]');
+    const $button = this.$target.querySelector(
+      '[data-name="change-button-wrap"]',
+    );
 
-//   async handleClickButton() {
-//     const { data } = await axios.get('https://free-quotes-api.herokuapp.com/');
-//     this.setState({ quote: data.quote, author: data.author });
-//   }
-// }
+    new Contents($contents, this.state);
+    new ChangeButton($button, { onClick: this.handleClickButton.bind(this) });
+    return;
+  }
 
-// export default RandomQuotes;
+  setState(newState: { [key: string]: string }) {
+    this.state = { ...this.state, ...newState };
+    this.render();
+  }
+
+  async handleClickButton() {
+    const { data } = await axios.get('https://free-quotes-api.herokuapp.com/');
+    this.setState({ quote: data.quote, author: data.author });
+  }
+}
+
+export default RandomQuotes;

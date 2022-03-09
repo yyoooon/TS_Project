@@ -1,28 +1,34 @@
 import Component from './components/template/Component';
-import Home from './views/Home';
-import HexColors from './views/HexColors';
-// import RandomQuotes from './views/RandomQuotes';
+import router from './routes/router';
+import { pushRouter, replaceRouter, popStateRouter } from './routes/routeUtils';
+import Header from './components/Header/Header';
 
 export default class App extends Component<undefined, undefined> {
-  route() {
-    const { pathname } = window.location;
-    switch (pathname) {
-      case '/':
-        new Home(this.$target);
-        break;
-      case '/HexColors':
-        new HexColors(this.$target);
-        break;
-      // case '/RandomQuotes':
-      //   new RandomQuotes(this.$target);
-      //   break;
-      default:
-        console.log('not found page');
-    }
+  template() {
+    return `
+    <header data-name="header"></header>
+    <main  data-name="main"></main>
+    <footer  data-name="footer"></footer>
+    `;
   }
+
+  setInitRoute(target: Element) {
+    router(target);
+    pushRouter(() => {
+      router(target);
+    });
+    replaceRouter(() => {
+      router(target);
+    });
+    popStateRouter(() => {
+      router(target);
+    });
+  }
+
   mounted() {
-    this.route();
+    const $header = this.$target.querySelector('[data-name="header"]');
+    const $main = this.$target.querySelector('[data-name="main"]');
+    new Header($header);
+    this.setInitRoute($main);
   }
 }
-
-//history.pushState로 url이동 후 route를 한번 더 실행해야한다

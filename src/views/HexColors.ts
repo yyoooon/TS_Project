@@ -1,6 +1,6 @@
 import Component from '../components/template/Component';
-import Contents from '../components/hexColors/Contents';
-import ChageButton from '../components/hexColors/ChangeButton';
+import Contents from '../components/HexColors/Contents';
+import ChageButton from '../components/HexColors/ChangeButton';
 
 interface HexColorsState {
   hexCode: string;
