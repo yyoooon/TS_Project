@@ -1,24 +1,55 @@
-import Home from '../views/Home';
-import HexColors from '../views/HexColors';
-import RandomQuotes from '../views/RandomQuotes';
+const ROUTE_PUSH_EVENT_NAME = 'route-push';
+const ROUTE_REPLACE_EVENT_NAME = 'route-replace';
 
-const router = (target: Element) => {
-  const { pathname } = window.location;
-  switch (pathname) {
-    case '/':
-      new Home(target);
-      break;
-    case '/HexColors':
-      new HexColors(target);
-      break;
-    case '/RandomQuotes':
-      new RandomQuotes(target);
-      break;
-    default:
-      console.log('not found page');
-  }
+interface CustomEventType extends Event {
+  detail: {
+    [key: string]: string;
+  };
+}
+
+export const pushRouter = (onRoute: () => void) => {
+  window.addEventListener(ROUTE_PUSH_EVENT_NAME, (e: CustomEventType) => {
+    const { nextUrl } = e.detail;
+    if (nextUrl) {
+      history.pushState(null, null, nextUrl);
+      onRoute();
+    }
+  });
 };
 
-export default router;
+export const replaceRouter = (onRoute: () => void) => {
+  window.addEventListener(ROUTE_REPLACE_EVENT_NAME, (e: CustomEventType) => {
+    const { nextUrl } = e.detail;
+    if (nextUrl) {
+      history.replaceState(null, null, nextUrl);
 
-//history.pushState로 url이동 후 route를 한번 더 실행해야한다
+      onRoute();
+    }
+  });
+};
+
+export const popStateRouter = (onRoute: () => void) => {
+  window.addEventListener('popstate', () => {
+    onRoute();
+  });
+};
+
+export const push = (nextUrl: string) => {
+  window.dispatchEvent(
+    new CustomEvent('route-push', {
+      detail: {
+        nextUrl,
+      },
+    }),
+  );
+};
+
+export const replace = (nextUrl: string) => {
+  window.dispatchEvent(
+    new CustomEvent('route-replace', {
+      detail: {
+        nextUrl,
+      },
+    }),
+  );
+};

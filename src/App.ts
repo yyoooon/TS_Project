@@ -1,6 +1,6 @@
 import Component from './components/template/Component';
-import router from './routes/router';
-import { pushRouter, replaceRouter, popStateRouter } from './routes/routeUtils';
+import router from './routes/routes';
+import { pushRouter, replaceRouter, popStateRouter } from './routes/router';
 import Header from './components/Header/Header';
 
 export default class App extends Component<undefined, undefined> {
@@ -12,7 +12,7 @@ export default class App extends Component<undefined, undefined> {
     `;
   }
 
-  setInitRoute(target: Element) {
+  setInitRouter(target: Element) {
     router(target);
     pushRouter(() => {
       router(target);
@@ -29,6 +29,6 @@ export default class App extends Component<undefined, undefined> {
     const $header = this.$target.querySelector('[data-name="header"]');
     const $main = this.$target.querySelector('[data-name="main"]');
     new Header($header);
-    this.setInitRoute($main);
+    this.setInitRouter($main);
   }
 }
