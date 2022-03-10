@@ -1,6 +1,6 @@
 import Component from '../components/template/Component';
-import Contents from '../components/RandomQuotes_/Contents';
-import ChangeButton from '../components/RandomQuotes_/ChangeButton';
+import Contents from '../components/RandomQuotes/Contents';
+import ChangeButton from '../components/RandomQuotes/ChangeButton';
 import axios from 'axios';
 
 class RandomQuotes extends Component<undefined, { [key: string]: string }> {
