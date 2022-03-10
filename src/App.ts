@@ -1,29 +1,34 @@
-// import HexColors from './views/HexColors';
-// import RandomQuotes from './views/RandomQuotes';
-// import ImageSlider from './views/ImageSlider';
-// import { imageUrlList } from './dummy';
-// import DigitalClock from './views/DigitalClock';
-import Calculator from './views/Calculator';
+import Component from './components/template/Component';
+import router from './routes/routes';
+import { pushRouter, replaceRouter, popStateRouter } from './routes/router';
+import Header from './components/Header/Header';
 
-export default class App {
-  $target: Element;
-  constructor({ $target }: { $target: Element }) {
-    this.$target = $target;
-    this.route();
+export default class App extends Component<undefined, undefined> {
+  template() {
+    return `
+    <header data-name="header"></header>
+    <main  data-name="main"></main>
+    <footer  data-name="footer"></footer>
+    `;
   }
-  route() {
-    const { pathname } = window.location;
-    if (pathname === '/') {
-      // new HexColors(this.$target);
-      // new RandomQuotes(this.$target);
-      // new ImageSlider(this.$target, { imageUrlList });
-      // new DigitalClock(this.$target);
-      // new ButtonContainer(this.$target, {
-      //   onClick: value => {
-      //     console.log(value);
-      //   },
-      // });
-      new Calculator(this.$target);
-    }
+
+  setInitRouter(target: Element) {
+    router(target);
+    pushRouter(() => {
+      router(target);
+    });
+    replaceRouter(() => {
+      router(target);
+    });
+    popStateRouter(() => {
+      router(target);
+    });
+  }
+
+  mounted() {
+    const $header = this.$target.querySelector('[data-name="header"]');
+    const $main = this.$target.querySelector('[data-name="main"]');
+    new Header($header);
+    this.setInitRouter($main);
   }
 }

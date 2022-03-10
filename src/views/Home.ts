@@ -1,17 +1,28 @@
-export default class Home {
-  $target: Element;
-  $home: Element;
-  constructor({ $target }: { $target: Element }) {
-    this.$target = $target;
-    this.$home = document.createElement('div');
-    this.render();
+import Component from '../components/template/Component';
+import Contents from '../components/Home/Contents';
+
+const contentData = [
+  {
+    title: 'HexColors',
+    thumbnail: '썸네일1',
+    url: 'HexColors',
+  },
+  {
+    title: 'RandomQuotes',
+    thumbnail: '썸네일2',
+    url: 'RandomQuotes',
+  },
+];
+
+export default class Home extends Component<
+  undefined,
+  { [key: string]: string }[]
+> {
+  setup() {
+    this.state = contentData;
   }
-  route() {
-    this.$target.appendChild(this.$home);
-  }
-  render() {
-    this.$home.innerHTML = `
-      <h1 class='home_title'>안녕ㅠㅠㅠ!!!!!</h1>
-    `;
+
+  mounted() {
+    new Contents(this.$target, { data: this.state });
   }
 }

@@ -12,6 +12,7 @@ module.exports = {
   output: {
     path: path.resolve('./dist'),
     filename: '[name].js', // 파일명 []사용시 entry키값
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -49,10 +50,18 @@ module.exports = {
     hot: 'only',
     port: 5500,
     compress: true,
+    historyApiFallback: true,
   },
   resolve: {
     modules: [path.join(__dirname, 'src'), 'node_modules'],
     extensions: ['*', '.ts', '.js'],
+    alias: {
+      Components: path.resolve(__dirname, 'src/Components/'),
+      dummy: path.resolve(__dirname, 'src/dummy/'),
+      utils: path.resolve(__dirname, 'src/utils/'),
+      views: path.resolve(__dirname, 'src/views/'),
+      style: path.resolve(__dirname, 'src/style/'),
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({

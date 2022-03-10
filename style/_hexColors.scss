@@ -1,4 +1,4 @@
-.hex-color_container {
+[data-name='hex-colors_container'] {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,13 +25,27 @@
       color: red;
     }
   }
-  .title {
+
+  [data-name='title'] {
     font-size: 2rem;
     margin-bottom: 50px;
   }
 
-  .color-code {
+  [data-name='color-code'] {
     font-size: 1.5rem;
     margin-bottom: 20px;
+  }
+
+  [data-name='change-button'] {
+    width: 100px;
+    height: 50px;
+    background-color: darken($color: #fff, $amount: 4%);
+    border-radius: 10px;
+    font-size: 1.2rem;
+    margin: 1.5rem auto;
+    transition: all 150ms ease-out;
+    &:hover {
+      background-color: darken($color: #fff, $amount: 12%);
+    }
   }
 }
