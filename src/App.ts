@@ -1,5 +1,5 @@
 import Component from './components/template/Component';
-import router from './routes/routes';
+import route from './routes/routes';
 import { pushRouter, replaceRouter, popStateRouter } from './routes/router';
 import Header from './components/Header/Header';
 
@@ -13,15 +13,15 @@ export default class App extends Component<undefined, undefined> {
   }
 
   setInitRouter(target: Element) {
-    router(target);
+    route(target);
     pushRouter(() => {
-      router(target);
+      route(target);
     });
     replaceRouter(() => {
-      router(target);
+      route(target);
     });
     popStateRouter(() => {
-      router(target);
+      route(target);
     });
   }
 
