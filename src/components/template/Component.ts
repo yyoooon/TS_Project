@@ -8,13 +8,14 @@ export default class Component<P, S> {
     this.setup();
     this.render();
     this.setEvent();
+    this.fetch();
   }
 
   setup() {
     return;
   }
 
-  mounted() {
+  fetch() {
     return;
   }
 
@@ -22,18 +23,8 @@ export default class Component<P, S> {
     return '';
   }
 
-  render() {
-    this.$target.innerHTML = this.template();
-    this.mounted();
-  }
-
-  setEvent() {
+  mounted() {
     return;
-  }
-
-  setState(newState: S) {
-    this.state = { ...this.state, ...newState };
-    this.render();
   }
 
   addEventToTarget(
@@ -53,5 +44,23 @@ export default class Component<P, S> {
       if (!isTarget(event.target)) return false;
       callback(event);
     });
+  }
+
+  setEvent() {
+    return;
+  }
+
+  render() {
+    this.$target.innerHTML = this.template();
+    this.mounted();
+  }
+
+  reRender() {
+    return;
+  }
+
+  setState(newState: S, reRender = false) {
+    this.state = { ...this.state, ...newState };
+    reRender ? this.reRender() : this.render();
   }
 }
