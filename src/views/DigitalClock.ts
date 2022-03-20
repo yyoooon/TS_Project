@@ -1,45 +1,36 @@
-// import Component from '../components/Component';
-// import { DateValues, getCurrentDate } from '../utils/getDateValues';
+import Component from '../components/template/Component';
+import Clock from '../components/DigitalClock/Clock';
+import { DateValues, getCurrentDate } from '../utils/getDateValues';
 
-// class DigitalClock extends Component<undefined> {
-//   state: DateValues;
-//   constructor($target: Element) {
-//     super($target);
-//     this.state;
-//     this.setState();
-//     this.mount();
-//   }
+class DigitalClock extends Component<undefined, { dateValues: DateValues }> {
+  Clock: Clock;
 
-//   template() {
-//     return `
-//       <div class='digital-clock-container'>
-//         <div class='digital-clock'>
-//           <h1> ${this.state.dd}</h1>
-//           <h1> ${this.state.hh.hour}</h1>
-//           <h1> ${this.state.mm}</h1>
-//           <h1> ${this.state.ss}</h1>
-//           <h1> ${this.state.hh.time}</h1>
-//         </div>
-//       </div>
-//     `;
-//   }
+  setup() {
+    this.state = { dateValues: getCurrentDate() };
 
-//   render() {
-//     this.$target.innerHTML = '';
-//     this.$target.innerHTML = this.template();
-//   }
+    setInterval(() => {
+      this.setState({ dateValues: getCurrentDate() }, true);
+    }, 1000);
+  }
 
-//   setState() {
-//     this.state = getCurrentDate();
-//     this.render();
-//   }
+  template() {
+    return `
+      <div data-name='digital-clock-container'>
+        <div data-name='digital-clock'></div>
+      </div>
+    `;
+  }
 
-//   mount() {
-//     setInterval(() => {
-//       this.setState();
-//     }, 1000);
-//     console.log(this.state);
-//   }
-// }
+  mounted() {
+    const $digitalClock = this.$target.querySelector(
+      '[data-name="digital-clock"]',
+    );
+    this.Clock = new Clock($digitalClock, this.state.dateValues);
+  }
 
-// export default DigitalClock;
+  reRender() {
+    this.Clock.setState(this.state.dateValues);
+  }
+}
+
+export default DigitalClock;

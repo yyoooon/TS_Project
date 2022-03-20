@@ -12,6 +12,11 @@ const contentData = [
     thumbnail: '썸네일2',
     url: 'RandomQuotes',
   },
+  {
+    title: 'DigitalClock',
+    thumbnail: '썸네일3',
+    url: 'DigitalClock',
+  },
 ];
 
 export default class Home extends Component<

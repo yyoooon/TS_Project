@@ -43,3 +43,15 @@ export const getCurrentDate = (): DateValues => {
     dd: dayList[today.getDay()].toUpperCase(),
   };
 };
+
+// 이 함수로 변경하기
+// const setTime = () => {
+//   const options = {
+//     weekday: 'short',
+//     hour: 'numeric',
+//     minute: 'numeric',
+//   };
+
+//   const time = new Intl.DateTimeFormat('en', options)
+//     .format(new Date())
+//     .toUpperCase();
