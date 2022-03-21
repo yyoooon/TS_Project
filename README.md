@@ -1,4 +1,4 @@
-# TS_Projects
+## Vanllia TS SPA 프로젝트
 
 ### TypeScript만으로 다양한 미니 프로젝트가 담긴 SPA를 구현하는 프로젝트
 - 개인 프로젝트  
