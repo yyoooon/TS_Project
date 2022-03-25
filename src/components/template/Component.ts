@@ -30,7 +30,7 @@ export default class Component<P, S> {
   addEventToTarget(
     eventType: string,
     selector: string,
-    callback: (e: Event) => void,
+    callback: (e?: Event) => void,
   ) {
     const children = [...Array.from(this.$target.querySelectorAll(selector))];
 
@@ -59,6 +59,7 @@ export default class Component<P, S> {
     return;
   }
 
+  // 방법을 찾자
   setState(newState: S, reRender = false) {
     this.state = { ...this.state, ...newState };
     reRender ? this.reRender() : this.render();
