@@ -36,7 +36,7 @@ export const popStateRouter = (onRoute: () => void) => {
 
 export const push = (nextUrl: string) => {
   window.dispatchEvent(
-    new CustomEvent('route-push', {
+    new CustomEvent(ROUTE_PUSH_EVENT_NAME, {
       detail: {
         nextUrl,
       },
@@ -46,7 +46,7 @@ export const push = (nextUrl: string) => {
 
 export const replace = (nextUrl: string) => {
   window.dispatchEvent(
-    new CustomEvent('route-replace', {
+    new CustomEvent(ROUTE_REPLACE_EVENT_NAME, {
       detail: {
         nextUrl,
       },
