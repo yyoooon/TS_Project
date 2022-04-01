@@ -3,6 +3,7 @@ import { imageUrlList } from '../dummy/index';
 import Slider from '../components/ImageSlider/Slider';
 import ArrowButtons from '../components/ImageSlider/ArrowButtons';
 import Dots from '../components/ImageSlider/Dots';
+import '../../style/imageSlider.scss';
 
 interface StateType {
   currentSlideIndex: number;

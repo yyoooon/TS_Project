@@ -1,5 +1,6 @@
 import Component from '../components/template/Component';
 import Contents from '../components/RandomQuotes/Contents';
+import '../../style/randomQuotes.scss';
 import axios from 'axios';
 
 class RandomQuotes extends Component<undefined, { [key: string]: string }> {

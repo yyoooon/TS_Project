@@ -1,6 +1,7 @@
 import Component from '../components/template/Component';
 import Clock from '../components/DigitalClock/Clock';
 import { DateValues, getCurrentDate } from '../utils/getDateValues';
+import '../../style/digitalClock.scss';
 
 class DigitalClock extends Component<undefined, { dateValues: DateValues }> {
   Clock: Clock;
