@@ -1,5 +1,6 @@
 import Component from '../components/template/Component';
 import Contents from '../components/HexColors/Contents';
+import '../../style/hexColors.scss';
 
 interface HexColorsState {
   hexCode: string;

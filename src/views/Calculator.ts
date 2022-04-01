@@ -2,6 +2,7 @@
 // import ViewBox from '../components/Calculator/ViewBox';
 // import ButtonContainer from '../components/Calculator/ButtonContainer';
 // import { createDom } from '../utils/createDom';
+// import '../../style/calculator.scss';
 
 // class Calculator extends Component<undefined> {
 //   state = '';

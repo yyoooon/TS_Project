@@ -1,5 +1,6 @@
 import Component from '../components/template/Component';
 import Contents from '../components/Home/Contents';
+import '../../style/home.scss';
 
 const contentData = [
   {
