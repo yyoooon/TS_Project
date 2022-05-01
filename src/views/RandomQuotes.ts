@@ -9,7 +9,7 @@ class RandomQuotes extends Component<undefined, { [key: string]: string }> {
   setup() {
     this.state = {
       quote: '',
-      author: 'RandomQuotes',
+      author: '',
     };
   }
 
@@ -27,9 +27,8 @@ class RandomQuotes extends Component<undefined, { [key: string]: string }> {
     this.Contents = new Contents($contents, this.state);
   }
 
-  async handleClickButton() {
-    const { data } = await axios.get('https://free-quotes-api.herokuapp.com/');
-    this.setState({ quote: data.quote, author: data.author }, true);
+  handleClickButton() {
+    this.fetch();
   }
 
   setEvent() {
@@ -42,6 +41,11 @@ class RandomQuotes extends Component<undefined, { [key: string]: string }> {
 
   reRender() {
     this.Contents.setState(this.state);
+  }
+
+  async fetch() {
+    const { data } = await axios.get('https://free-quotes-api.herokuapp.com/');
+    this.setState({ quote: data.quote, author: data.author }, true);
   }
 }
 

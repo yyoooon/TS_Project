@@ -6,9 +6,9 @@ export default class Component<P, S> {
     this.$target = $target;
     this.props = props;
     this.setup();
+    this.fetch();
     this.render();
     this.setEvent();
-    this.fetch();
   }
 
   setup() {
@@ -59,7 +59,6 @@ export default class Component<P, S> {
     return;
   }
 
-  // 방법을 찾자
   setState(newState: S, reRender = false) {
     this.state = { ...this.state, ...newState };
     reRender ? this.reRender() : this.render();
